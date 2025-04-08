@@ -1,0 +1,58 @@
+﻿
+@using EntityLayer.Concrete
+@model List<WriterUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+<div class="col-md-6">
+    <div class="p-2">
+        <button type="button" id="btngetlistall" class="btn btn-outline-primary">Verileri Getir</button>
+        <button type="button" id="btnaddwriter" class="btn btn-outline-info">Kaydet</button>
+    </div>
+</div>
+
+<h4 class="text-center"> Yazar Listesi </h4>
+
+<div class="p-2" id="listwriter">buraya veriler gelecek
+
+</div>
+
+<br />
+
+<div class="col-md-12">
+    <input  type="text" class="form-control" id="inpname" placeholder="Adınız"/>
+    <br />
+    <input  type="text" class="form-control" id="inpsurname" placeholder=Soyadınız"/>
+    <br />
+    <input  type="text" class="form-control" id="inpusername" placeholder="Kullanıcı Adınız"/>
+    <br />
+    <input  type="text" class="form-control" id="inpmail" placeholder="Mail Adresiniz"/>
+    <br />
+    <input  type="text" class="form-control" id="inpname" placeholder="Adınız"/>
+</div>
+
+@* ajax üzerinden veri getirme işlemi *@
+@section scripts{
+    @* <script src="~/wwwroot/lib/jquery/dist/jquery.js"></script> *@
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $("#btngetlistall").click(function() {
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "Get",
+                url: "/WriterUser/ListWriter/",
+
+                success: function (func) {
+                    let writers = jQuery.parseJSON(func);
+                    console.log(writers);
+                }
+            });
+        });
+    </script>
+}
+
+
